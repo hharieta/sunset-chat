@@ -29,7 +29,7 @@ export default function Footer() {
           <div>
             <h3 className="font-['Poppins'] font-bold mb-4">Aviso Legal</h3>
             <p className="text-sm">
-              Este sitio web es un proyecto académico creado con fines educativos. 
+              Este sitio web es un proyecto escolar creado con fines educativos. 
               No está afiliado con ninguna empresa real y cualquier similitud con 
               marcas existentes es puramente coincidental.
             </p>
@@ -38,7 +38,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="border-t border-gray-200 mt-8 pt-4 text-center text-sm">
-          <p>© {new Date().getFullYear()} Proyecto Académico. Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} Proyecto Escolar. Nos reservamos el derecho de vivir felices.</p>
         </div>
       </div>
     </footer>
