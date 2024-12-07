@@ -1,17 +1,29 @@
 'use client';
 
 import { useChat} from 'ai/react';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from '../../app/styles/Chat.module.css'
+
+
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit, setMessages} = useChat();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  React.useEffect(() =>{
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }
+
+  useEffect(() => {
+    scrollToBottom();
+  }), [messages]
+
+  useEffect(() =>{
     setMessages([
       {
         id: '1',
         role: 'system',
-        content: `Eres un asistente de recepción para le hotel Sunset Marina Resort & Yacht Club, te llamas SunsetBot y debes responder las preguntas del usuario (no salgas del contexto del hotel).
+        content: `Eres un asistente de recepción para le hotel Sunset Marina Resort & Yacht Club, te llamas SunsetBot y debes responder las preguntas del usuario. Tus respuestas deben ser claras, directas y cortas. (no salgas del contexto del hotel).
                   A continuación, te dejo información del hotel:
                   Sunset Marina Resort & Yacht Club es un encantador resort estilo mediterráneo ubicado en un paisaje hermoso junto a la Laguna Nichupté, en la zona hotelera de Cancún. Ofrece un ambiente tranquilo e ideal para unas relajantes vacaciones, también los niños disfrutarán de este resort en áreas especialmente diseñadas para ellos. La marina que se encuentra en la propiedad ofrece acceso directo las cristalinas aguas del Caribe mexicano en excursiones en yates privados y también una gran variedad de deportes acuáticos motorizados y experiencias de buceo espectaculares. La playa se encuentra a tan solo unos minutos.
                   Las instalaciones del hotel cuentan con
@@ -53,31 +65,45 @@ export default function Chat() {
   }, [setMessages]);
 
   return (
-    <div className={styles.chatBar}>
-      <div className={styles.chatMessages}>
-        {messages.filter(m => m.role !== 'system').map(m => (
-          <div 
-            key={m.id} 
-            className={m.role === 'user' ? styles.userText : styles.botText}
-          >
-            <span className={`
-              ${styles.messageContent} 
-              ${m.role === 'user' ? styles.userMessageContent : styles.botMessageContent}
-            `}>
-              {m.content}
-            </span>
-          </div>
-        ))}
-      </div>
+    <div className='max-h-[400px] h-full border-gray-400'>
+      <div className={styles.chatBar}>
+        <button 
+          onClick={() => setIsOpen(!isOpen)}
+          className={styles.collapsible}
+        >
+          {isOpen ? '🔒 Cerrar Chat' : '💬 Chat'}
+        </button>
 
-      <form onSubmit={handleSubmit} className="mt-4">
-        <input
-          className="w-full p-2 border border-gray-300 text-gray-900 rounded-lg focus:outline-none focus:border-purple-400"
-          value={input}
-          onChange={handleInputChange}
-          placeholder="Escribe tu mensaje..."
-        />
-      </form>
+        {isOpen && (
+          <div className="flex flex-col h-[400px] bg-slate-100 rounded-lg border border-gray-300 p-4 mt-2">
+            <div className="flex-1 overflow-y-auto mb-4">
+              {messages.filter(m => m.role !== 'system').map(m => (
+                <div 
+                  key={m.id} 
+                  className={m.role === 'user' ? styles.userText : styles.botText}
+                >
+                  <span className={`
+                    ${styles.messageContent} 
+                    ${m.role === 'user' ? styles.userMessageContent : styles.botMessageContent}
+                  `}>
+                    {m.content}
+                    <div ref={messagesEndRef} />
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <form onSubmit={handleSubmit}>
+              <input
+                className="w-full p-2 border border-gray-300 text-gray-900 rounded-lg focus:outline-none focus:border-purple-400"
+                value={input}
+                onChange={handleInputChange}
+                placeholder="Escribe tu mensaje..."
+              />
+            </form>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
