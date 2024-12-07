@@ -20,7 +20,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="py-16 items-center  inset-0 bg-cover bg-center z-0" style={{backgroundImage: 'url(/static/img/sunset.png)'}}>
+    <section className="py-16 items-center  inset-0 bg-cover bg-center z-0" style={{backgroundImage: 'url(/static/img/Sunset.png)'}}>
       <div className="container mx-auto px-4">
         <h2 className="font-['Poppins'] text-[#c49b6b] text-3xl text-center mb-10">Servicios Destacados</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
