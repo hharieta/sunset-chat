@@ -2,6 +2,7 @@ import Navbar from './components/navbar';
 import Banner from './components/banner';
 import Services from './components/service';
 import Chat from './components/Chat';
+import Footer from './components/footer';
 import '../app/styles/fonts.css'
 
 export default function Home() {
@@ -45,6 +46,8 @@ export default function Home() {
 
         <Chat />
       </main>
+
+      <Footer />
     </>
   );
 }

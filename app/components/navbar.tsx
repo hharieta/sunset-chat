@@ -19,7 +19,7 @@ export default function Navbar() {
         <ul className="font-['Poppins'] flex space-x-6">
           <li><Link href="/" className="text-gray-600 hover:text-[#f39c12] transition-colors">Inicio</Link></li>
           <li><Link href="/about" className="text-gray-600 hover:text-[#f39c12] transition-colors">Nosotros</Link></li>
-          <li><Link href="/contact" className="text-gray-600 hover:text-[#f39c12] transition-colors">Contacto</Link></li>
+          <li><Link href="#contact" className="text-gray-600 hover:text-[#f39c12] transition-colors">Contacto</Link></li>
           <li><Link href="#reservas" className="text-gray-600 hover:text-[#f39c12] transition-colors">Reservas</Link></li>
         </ul>
       </nav>
