@@ -16,7 +16,7 @@ export default function Chat() {
 
   useEffect(() => {
     scrollToBottom();
-  }), [messages]
+  }, [messages]);
 
   useEffect(() =>{
     setMessages([
